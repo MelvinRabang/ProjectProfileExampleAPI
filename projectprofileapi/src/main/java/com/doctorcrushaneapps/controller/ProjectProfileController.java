@@ -1,8 +1,10 @@
 package com.doctorcrushaneapps.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,13 +13,14 @@ import com.doctorcrushaneapps.dto.ProjectProfileDto;
 @RestController
 public class ProjectProfileController {
 
-	@RequestMapping(value="/searchProjectProfiles", method=RequestMethod.GET)
+	@RequestMapping(value="/api/searchProjectProfiles", method=RequestMethod.GET)
 	@ResponseBody
-	public ProjectProfileDto searchProjectProfiles(ProjectProfileDto searchProjectProfile) {
+	public List<ProjectProfileDto> searchProjectProfiles(ProjectProfileDto searchProjectProfile) {
 		return this.createDummyProjectProfile();
 	}
 	
-	private ProjectProfileDto createDummyProjectProfile() {
+	private List<ProjectProfileDto> createDummyProjectProfile() {
+		List<ProjectProfileDto> dummyProjectProfileList = new ArrayList<>();
 		ProjectProfileDto projectProfileDto = new ProjectProfileDto();
 
 		projectProfileDto.setProjectProfileName("Tech sustainment");
@@ -26,6 +29,7 @@ public class ProjectProfileController {
 		projectProfileDto.setProjectProfileProjectLocation("Taguig city");
 		projectProfileDto.setProjectProfileIndustryGroup("Retail");
 		projectProfileDto.setProjectProfileSeniorExec("Margaret Ang");
-		return projectProfileDto;
+		dummyProjectProfileList.add(projectProfileDto);
+		return dummyProjectProfileList;
 	}
 }
