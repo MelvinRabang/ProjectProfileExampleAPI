@@ -11,4 +11,5 @@
 <fullyQualifiedTypeName name="com.doctorcrushaneapps.controller.ProjectProfileController"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.doctorcrushaneapps.exception.ControllerException"/>
 </qualifiedTypeNameHistroy>
