@@ -1,7 +1,5 @@
 package com.doctorcrushaneapps.service.impl;
 
-import static org.hamcrest.CoreMatchers.theInstance;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,37 +31,37 @@ public class SearchProjectProfileServiceImpl implements SearchProjectProfileServ
 
 	private String deriveQueryStringForProjectProfileSearch(ProjectProfileDto projectProfileDto) {
 		StringBuilder queryStringForProjProfSearch = new StringBuilder();
-		queryStringForProjProfSearch.append("SELECT * FROM PRJCT_PRFL WHERE");
+		queryStringForProjProfSearch.append("SELECT * FROM PRJCT_PROFL WHERE");
 		
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileDeliveryLead())) {
-			queryStringForProjProfSearch.append(" DLVRY_LD_EID LIKE " +
-				projectProfileDto.getProjectProfileDeliveryLead());
+			queryStringForProjProfSearch.append(" DLVRY_LD_EID LIKE '%" +
+				projectProfileDto.getProjectProfileDeliveryLead() + "%' ");
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileIndustryGroup())) {
-			queryStringForProjProfSearch.append(" IND_GRP LIKE " +
-					projectProfileDto.getProjectProfileIndustryGroup());
+			queryStringForProjProfSearch.append(" IND_GRP LIKE '%" +
+					projectProfileDto.getProjectProfileIndustryGroup() + "%' ");
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileName())) {
-			queryStringForProjProfSearch.append(" PRJ_NM LIKE " +
-					projectProfileDto.getProjectProfileName());
+			queryStringForProjProfSearch.append(" PRJ_NM LIKE '%" +
+					projectProfileDto.getProjectProfileName() + "%' ");
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileProjectLocation())) {
-			queryStringForProjProfSearch.append(" PRJCT_LOC LIKE " +
-					projectProfileDto.getProjectProfileProjectLocation());
+			queryStringForProjProfSearch.append(" PRJCT_LOC LIKE '%" +
+					projectProfileDto.getProjectProfileProjectLocation() + "%' ");
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileSeniorExec())) {
-			queryStringForProjProfSearch.append(" SNR_EXC_EID LIKE " +
-					projectProfileDto.getProjectProfileSeniorExec());
+			queryStringForProjProfSearch.append(" SNR_EXC_EID LIKE '%" +
+					projectProfileDto.getProjectProfileSeniorExec() + "%' ");
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileSubTeamName())) {
-			queryStringForProjProfSearch.append(" SB_TM_NM LIKE " +
-					projectProfileDto.getProjectProfileSeniorExec());
+			queryStringForProjProfSearch.append(" SB_TM_NM LIKE '%" +
+					projectProfileDto.getProjectProfileSeniorExec() + "%' ");
 		}
 		return queryStringForProjProfSearch.toString();
 	}

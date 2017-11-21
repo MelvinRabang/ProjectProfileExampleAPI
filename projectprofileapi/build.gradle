@@ -28,7 +28,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile files('libs/ojdbc7-12.1.0.2.jar')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	
 }
