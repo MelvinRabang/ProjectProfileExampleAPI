@@ -1,9 +1,11 @@
 package com.doctorcrushaneapps.service;
 
+import java.util.List;
+
 import com.doctorcrushaneapps.dto.ProjectProfileDto;
 import com.doctorcrushaneapps.exception.ServiceException;
 
 public interface SearchProjectProfileService {
 
-	public ProjectProfileDto searchProjectProfile(ProjectProfileDto projectProfileDto) throws ServiceException;
+	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto) throws ServiceException;
 }

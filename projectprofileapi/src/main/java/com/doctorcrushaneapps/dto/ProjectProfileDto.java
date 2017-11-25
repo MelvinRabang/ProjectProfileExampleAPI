@@ -8,6 +8,8 @@ public class ProjectProfileDto {
 	private String projectProfileProjectLocation;
 	private String projectProfileIndustryGroup;
 	private String projectProfileSeniorExec;
+	private String projectProfileFirstPointContact;
+	private String projectProfileSecondPointContact;
 
 	public String getProjectProfileName() {
 		return projectProfileName;
@@ -56,4 +58,20 @@ public class ProjectProfileDto {
 	public void setProjectProfileSeniorExec(String projectProfileSeniorExec) {
 		this.projectProfileSeniorExec = projectProfileSeniorExec;
 	}
+
+	public String getProjectProfileFirstPointContact() {
+		return projectProfileFirstPointContact;
+	}
+
+	public void setProjectProfileFirstPointContact(String projectProfileFirstPointContact) {
+		this.projectProfileFirstPointContact = projectProfileFirstPointContact;
+	}
+
+	public String getProjectProfileSecondPointContact() {
+		return projectProfileSecondPointContact;
+	}
+
+	public void setProjectProfileSecondPointContact(String projectProfileSecondPointContact) {
+		this.projectProfileSecondPointContact = projectProfileSecondPointContact;
+	}	
 }

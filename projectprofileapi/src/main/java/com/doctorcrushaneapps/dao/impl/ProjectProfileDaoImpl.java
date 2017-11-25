@@ -2,6 +2,7 @@ package com.doctorcrushaneapps.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -24,17 +25,18 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
     }
 	
 	@Override
-	public ProjectProfileDto searchProjectProfile(ProjectProfileDto projectProfileDto,
+	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto,
 			String queryStringForProjectProfileSearch)
 			throws DaoException {
-		ProjectProfileDto searchProjectProfileDto = null;
+		List<ProjectProfileDto> searchProjectProfileList = null;
 		try {
-			jdbcTemplate.queryForObject(queryStringForProjectProfileSearch, new ProjectProfileDtoSearchMapper());
+			searchProjectProfileList = 
+					jdbcTemplate.query(queryStringForProjectProfileSearch, new ProjectProfileDtoSearchMapper());
 		} catch (DataAccessException e) {
 			throw new DaoException("ProjectProfileDaoImpl => searchProjectProfile()",
 					e.getCause().getMessage());
 		}
-		return searchProjectProfileDto;
+		return searchProjectProfileList;
 	}
 	
 	private class ProjectProfileDtoSearchMapper implements RowMapper<ProjectProfileDto> {

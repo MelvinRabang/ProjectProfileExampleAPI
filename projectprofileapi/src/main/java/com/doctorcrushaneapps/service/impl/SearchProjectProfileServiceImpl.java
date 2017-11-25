@@ -1,5 +1,7 @@
 package com.doctorcrushaneapps.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +18,18 @@ public class SearchProjectProfileServiceImpl implements SearchProjectProfileServ
 	ProjectProfileDao projectProfileDao;
 
 	@Override
-	public ProjectProfileDto searchProjectProfile(ProjectProfileDto projectProfileDto)
+	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto)
 			throws ServiceException {
 		String queryStringForProjectProfileSearch =
 				this.deriveQueryStringForProjectProfileSearch(projectProfileDto);
+		List<ProjectProfileDto> projectProfileList = null;
 		try {
-			projectProfileDao.searchProjectProfile(projectProfileDto, queryStringForProjectProfileSearch);
+			projectProfileList = projectProfileDao.searchProjectProfile(projectProfileDto, queryStringForProjectProfileSearch);
 		} catch (DaoException e) {
 			throw new ServiceException("Error in SearchProjectProfileService => searchProjectProfile()",
 				e.getErrorCode());
 		}
-		return projectProfileDto;
+		return projectProfileList;
 	}
 
 	private String deriveQueryStringForProjectProfileSearch(ProjectProfileDto projectProfileDto) {
