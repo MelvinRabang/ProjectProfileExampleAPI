@@ -42,17 +42,12 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
     		"AND SCND_CNTCT_EID = :secondcontact " +
     		"AND PRJCT_LOC = :projectlocation";
     
-    //TODO
     private static final String SAVE_PROJECT_PROFILE_QUERY = 
     		"INSERT INTO PRJCT_PRFL " +
-    	    "WHERE PRJ_NM = :projectname " +
-    		"AND SB_TM_NM = :subteamname " +
-    		"AND IND_GRP = :industrygroup " +
-    		"AND SNR_EXC_EID = :seniorexecutive " +
-    		"AND DLVRY_LD_EID = :deliverylead " +
-    		"AND FRST_CNTCT_EID = :firstcontact " +
-    		"AND SCND_CNTCT_EID = :secondcontact " +
-    		"AND PRJCT_LOC = :projectlocation";
+    		"(PRJ_NM, SB_TM_NM, IND_GRP, SNR_EXC_EID, DLVRY_LD_EID, " +
+    		"FRST_CNTCT_EID, SCND_CNTCT_EID, PRJCT_LOC) VALUES " +
+    	    "(:projectname, :subteamname, :industrygroup, :seniorexecutive, " +
+    	    ":deliverylead, :firstcontact, :secondcontact, :projectlocation)";
     
     private static final String DELETE_PROJECT_PROFILE_QUERY = 
     		"DELETE FROM PRJCT_PRFL " +
@@ -111,7 +106,16 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 
 	@Override
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto profileProfileDtoToBeSaved) throws DaoException {
-		return null;
+		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(profileProfileDtoToBeSaved);
+		try {
+			profileProfileDtoToBeSaved =
+					(ProjectProfileDto) namedParameterJdbcTemplate.query(SAVE_PROJECT_PROFILE_QUERY,
+							projectProfileNamedParameters, new ProjectProfileDtoSearchMapper());
+		} catch (DataAccessException e) {
+			throw new DaoException("ProjectProfileDaoImpl => saveProjectProfile()",
+					e.getCause().getMessage());
+		}
+		return profileProfileDtoToBeSaved;
 	}
 	
 	private class ProjectProfileDtoSearchMapper implements RowMapper<ProjectProfileDto> {

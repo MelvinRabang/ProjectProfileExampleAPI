@@ -1,12 +1,14 @@
 package com.doctorcrushaneapps.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.doctorcrushaneapps.dao.ProjectProfileDao;
 import com.doctorcrushaneapps.dto.ProjectProfileDto;
 import com.doctorcrushaneapps.exception.ServiceException;
 import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
+@Service
 public class UpdateProjectProfileServiceImpl implements UpdateProjectProfileService {
 
 	@Autowired
