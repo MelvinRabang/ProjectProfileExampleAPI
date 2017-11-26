@@ -12,6 +12,7 @@ import com.doctorcrushaneapps.dto.ProjectProfileDto;
 import com.doctorcrushaneapps.exception.ControllerException;
 import com.doctorcrushaneapps.exception.ServiceException;
 import com.doctorcrushaneapps.service.SearchProjectProfileService;
+import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
 @RestController
 public class ProjectProfileController {
@@ -19,6 +20,9 @@ public class ProjectProfileController {
 	@Autowired
 	SearchProjectProfileService searchProjectProfileService;
 	
+	@Autowired
+	UpdateProjectProfileService updateProjectProfileService;
+
 	@RequestMapping(value="/api/searchProjectProfiles", method=RequestMethod.POST)
 	public List<ProjectProfileDto> searchProjectProfiles(@RequestBody ProjectProfileDto searchProjectProfile)
 			throws ControllerException{
@@ -26,8 +30,32 @@ public class ProjectProfileController {
 		try {
 			projectProfileList = searchProjectProfileService.searchProjectProfile(searchProjectProfile);
 		} catch (ServiceException e) {
-			throw new ControllerException("Controller Exception() => ", e.getErrorCode());
+			throw new ControllerException("Controller Exception - searchProjectProfiles() => ", e.getErrorCode());
 		}
 		return projectProfileList;
+	}
+	
+	@RequestMapping(value="/api/saveProjectProfiles", method=RequestMethod.POST)
+	public ProjectProfileDto saveProjectProfiles(@RequestBody ProjectProfileDto projectProfileDtoToBeSaved) 
+			throws ControllerException {
+		ProjectProfileDto finalProjectProfileDto = null;
+		try {
+			finalProjectProfileDto = updateProjectProfileService.saveProjectProfile(projectProfileDtoToBeSaved);
+		} catch (ServiceException e) {
+			throw new ControllerException("Controller Exception - saveProjectProfiles() => ", e.getErrorCode());
+		}
+		return finalProjectProfileDto;
+	}
+	
+	@RequestMapping(value="/api/isProjectProfileExist", method=RequestMethod.POST)
+	public boolean doesProjectProfileExist(@RequestBody ProjectProfileDto projectProfileDto) 
+			throws ControllerException {
+		boolean isProjectProfileExist = false;
+		try {
+			isProjectProfileExist = updateProjectProfileService.doesProjectProfileExist(projectProfileDto);
+		} catch (ServiceException e) {
+			throw new ControllerException("Controller Exception - doesProjectProfileExist() => ", e.getErrorCode());
+		}
+		return isProjectProfileExist;
 	}
 }
