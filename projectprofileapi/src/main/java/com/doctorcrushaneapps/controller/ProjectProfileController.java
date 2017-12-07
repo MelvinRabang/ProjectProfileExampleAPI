@@ -58,4 +58,28 @@ public class ProjectProfileController {
 		}
 		return isProjectProfileExist;
 	}
+	
+	@RequestMapping(value="/api/deleteProjectProfile", method=RequestMethod.POST)
+	public int deleteProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
+			throws ControllerException {
+		int rowsUpdated = 0;
+		try {
+			rowsUpdated = updateProjectProfileService.deleteProjectProfile(projectProfileDto);
+		} catch (ServiceException e) {
+			throw new ControllerException("Controller Exception - deleteProjectProfile() => ", e.getErrorCode());
+		}
+		return rowsUpdated;
+	}
+	
+	@RequestMapping(value="/api/updateProjectProfile", method=RequestMethod.PUT)
+	public int updateProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
+			throws ControllerException {
+		int rowsUpdated = 0;
+		try {
+			rowsUpdated = updateProjectProfileService.updateProjectProfile(projectProfileDto);
+		} catch (ServiceException e) {
+			throw new ControllerException("Controller Exception - updateProjectProfile() => ", e.getErrorCode());
+		}
+		return rowsUpdated;
+	}
 }

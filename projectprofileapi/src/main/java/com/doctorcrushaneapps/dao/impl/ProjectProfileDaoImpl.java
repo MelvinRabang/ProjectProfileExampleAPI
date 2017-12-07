@@ -32,7 +32,7 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
     }
 
     private static final String DOES_PROJECT_PROFILE_EXIST_QUERY = 
-    		"SELECT * FROM PRJCT_PRFL " +
+    		"SELECT * FROM PRJCT_PROFL " +
     	    "WHERE PRJ_NM = :projectname " +
     		"AND SB_TM_NM = :subteamname " +
     		"AND IND_GRP = :industrygroup " +
@@ -43,14 +43,14 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
     		"AND PRJCT_LOC = :projectlocation";
     
     private static final String SAVE_PROJECT_PROFILE_QUERY = 
-    		"INSERT INTO PRJCT_PRFL " +
+    		"INSERT INTO PRJCT_PROFL " +
     		"(PRJ_NM, SB_TM_NM, IND_GRP, SNR_EXC_EID, DLVRY_LD_EID, " +
     		"FRST_CNTCT_EID, SCND_CNTCT_EID, PRJCT_LOC) VALUES " +
     	    "(:projectname, :subteamname, :industrygroup, :seniorexecutive, " +
     	    ":deliverylead, :firstcontact, :secondcontact, :projectlocation)";
     
     private static final String DELETE_PROJECT_PROFILE_QUERY = 
-    		"DELETE FROM PRJCT_PRFL " +
+    		"DELETE FROM PRJCT_PROFL " +
     	    "WHERE PRJ_NM = :projectname " +
     		"AND SB_TM_NM = :subteamname " +
     		"AND IND_GRP = :industrygroup " +
@@ -60,17 +60,16 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
     		"AND SCND_CNTCT_EID = :secondcontact " +
     		"AND PRJCT_LOC = :projectlocation";
     
-    //TODO
-    private static final String EDIT_PROJECT_PROFILE_QUERY = 
-    		"INSERT INTO PRJCT_PRFL " +
-    	    "WHERE PRJ_NM = :projectname " +
-    		"AND SB_TM_NM = :subteamname " +
-    		"AND IND_GRP = :industrygroup " +
-    		"AND SNR_EXC_EID = :seniorexecutive " +
-    		"AND DLVRY_LD_EID = :deliverylead " +
-    		"AND FRST_CNTCT_EID = :firstcontact " +
-    		"AND SCND_CNTCT_EID = :secondcontact " +
-    		"AND PRJCT_LOC = :projectlocation";
+    private static final String UPDATE_PROJECT_PROFILE_QUERY = 
+    		"UPDATE PRJCT_PROFL " +
+    		"SET SB_TM_NM = :subteamname ," +
+    		"IND_GRP = :industrygroup ," +
+    		"SNR_EXC_EID = :seniorexecutive ," +
+    		"DLVRY_LD_EID = :deliverylead ," +
+    		"FRST_CNTCT_EID = :firstcontact ," +
+    		"SCND_CNTCT_EID = :secondcontact ," +
+    		"PRJCT_LOC = :projectlocation " +
+    		"WHERE PRJ_NM = :projectname ";
 
 	@Override
 	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto,
@@ -94,11 +93,10 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(profileProfileDto);
 		try {
 			projectProfileRetrievedFromDB =
-					(ProjectProfileDto) namedParameterJdbcTemplate.query(DOES_PROJECT_PROFILE_EXIST_QUERY,
+					(ProjectProfileDto) namedParameterJdbcTemplate.queryForObject(DOES_PROJECT_PROFILE_EXIST_QUERY,
 							projectProfileNamedParameters, new ProjectProfileDtoSearchMapper());
 		} catch (DataAccessException e) {
-			throw new DaoException("ProjectProfileDaoImpl => searchProjectProfile()",
-					e.getCause().getMessage());
+			return doesProjectProfileExist;
 		}
 		doesProjectProfileExist = isProjectProfileExistInDB(projectProfileRetrievedFromDB);
 		return doesProjectProfileExist;
@@ -108,9 +106,8 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto profileProfileDtoToBeSaved) throws DaoException {
 		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(profileProfileDtoToBeSaved);
 		try {
-			profileProfileDtoToBeSaved =
-					(ProjectProfileDto) namedParameterJdbcTemplate.query(SAVE_PROJECT_PROFILE_QUERY,
-							projectProfileNamedParameters, new ProjectProfileDtoSearchMapper());
+			namedParameterJdbcTemplate.update(SAVE_PROJECT_PROFILE_QUERY,
+							projectProfileNamedParameters);
 		} catch (DataAccessException e) {
 			throw new DaoException("ProjectProfileDaoImpl => saveProjectProfile()",
 					e.getCause().getMessage());
@@ -159,5 +156,31 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 
 	private static boolean isProjectProfileExistInDB(ProjectProfileDto projectProfileRetrievedFromDB) {
 		return projectProfileRetrievedFromDB != null;
+	}
+
+	@Override
+	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws DaoException {
+		int rowsUpdated = 0;
+		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(projectProfileToBeDeleted);
+		try {
+			rowsUpdated = namedParameterJdbcTemplate.update(DELETE_PROJECT_PROFILE_QUERY, projectProfileNamedParameters);
+		} catch (DataAccessException e) {
+			throw new DaoException("ProjectProfileDaoImpl => deleteProjectProfile()",
+					e.getCause().getMessage());
+		}
+		return rowsUpdated;
+	}
+
+	@Override
+	public int updateProjectProfile(ProjectProfileDto projectProfileToBeUpdated) throws DaoException {
+		int rowsUpdated = 0;
+		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(projectProfileToBeUpdated);
+		try {
+			rowsUpdated = namedParameterJdbcTemplate.update(UPDATE_PROJECT_PROFILE_QUERY, projectProfileNamedParameters);
+		} catch (DataAccessException e) {
+			throw new DaoException("ProjectProfileDaoImpl => deleteProjectProfile()",
+					e.getCause().getMessage());
+		}
+		return rowsUpdated;
 	}
 }

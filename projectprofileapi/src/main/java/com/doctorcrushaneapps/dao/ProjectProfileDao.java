@@ -14,4 +14,8 @@ public interface ProjectProfileDao {
 	public boolean doesProjectProfileExist(ProjectProfileDto profileProfileDto) throws DaoException;
 
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto profileProfileDtoToBeSaved) throws DaoException;
+	
+	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws DaoException;
+	
+	public int updateProjectProfile(ProjectProfileDto projectProfileToBeUpdated) throws DaoException;
 }
