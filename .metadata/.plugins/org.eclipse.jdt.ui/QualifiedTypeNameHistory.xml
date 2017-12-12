@@ -9,7 +9,6 @@
 <fullyQualifiedTypeName name="com.doctorcrushaneapps.controller.ProjectProfileController"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.doctorcrushaneapps.exception.ControllerException"/>
-<fullyQualifiedTypeName name="com.doctorcrushaneapps.exception.DaoException"/>
 <fullyQualifiedTypeName name="org.springframework.jdbc.core.JdbcTemplate"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
@@ -21,11 +20,18 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
-<fullyQualifiedTypeName name="com.doctorcrushaneapps.exception.ServiceException"/>
 <fullyQualifiedTypeName name="com.doctorcrushaneapps.dto.ProjectProfileDto"/>
 <fullyQualifiedTypeName name="com.doctorcrushaneapps.service.UpdateProjectProfileService"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.doctorcrushaneapps.exception.ServiceException"/>
+<fullyQualifiedTypeName name="com.doctorcrushaneapps.exception.DaoException"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.PropertySource"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
+<fullyQualifiedTypeName name="org.springframework.boot.context.properties.ConfigurationProperties"/>
+<fullyQualifiedTypeName name="com.doctorcrushaneapps.app.ProjectProfileSqlConfigureProperties"/>
 </qualifiedTypeNameHistroy>

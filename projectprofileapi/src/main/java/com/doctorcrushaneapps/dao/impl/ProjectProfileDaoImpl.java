@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +18,6 @@ import com.doctorcrushaneapps.app.ProjectProfileSqlConfigureProperties;
 import com.doctorcrushaneapps.dao.ProjectProfileDao;
 import com.doctorcrushaneapps.dto.ProjectProfileDto;
 import com.doctorcrushaneapps.exception.DaoException;
-import com.doctorcrushaneapps.exception.ServiceException;
 
 @Repository
 public class ProjectProfileDaoImpl implements ProjectProfileDao {
@@ -35,10 +35,13 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
     @Autowired
     private ProjectProfileSqlConfigureProperties sqlProperties;
 
+    Logger LOGGER = Logger.getLogger(ProjectProfileDaoImpl.class);
+    
 	@Override
 	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto,
 			String queryStringForProjectProfileSearch)
 			throws DaoException {
+		LOGGER.info("searchProjectProfile() - START");
 		List<ProjectProfileDto> searchProjectProfileList = null;
 		try {
 			searchProjectProfileList = 
@@ -47,11 +50,13 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 			throw new DaoException("ProjectProfileDaoImpl => searchProjectProfile()",
 					e.getCause().getMessage());
 		}
+		LOGGER.info("searchProjectProfile() - END");
 		return searchProjectProfileList;
 	}
 	
 	@Override
 	public boolean doesProjectProfileExist(ProjectProfileDto profileProfileDto) throws DaoException {
+		LOGGER.info("doesProjectProfileExist() - START");
 		boolean doesProjectProfileExist = false;
 		ProjectProfileDto projectProfileRetrievedFromDB = null;
 		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(profileProfileDto);
@@ -63,11 +68,13 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 			return doesProjectProfileExist;
 		}
 		doesProjectProfileExist = isProjectProfileExistInDB(projectProfileRetrievedFromDB);
+		LOGGER.info("doesProjectProfileExist() - END");
 		return doesProjectProfileExist;
 	}
 
 	@Override
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto profileProfileDtoToBeSaved) throws DaoException {
+		LOGGER.info("saveProjectProfile() - START");
 		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(profileProfileDtoToBeSaved);
 		try {
 			namedParameterJdbcTemplate.update(sqlProperties.getSaveProjectProfileQuery(),
@@ -76,6 +83,7 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 			throw new DaoException("ProjectProfileDaoImpl => saveProjectProfile()",
 					e.getCause().getMessage());
 		}
+		LOGGER.info("saveProjectProfile() - END");
 		return profileProfileDtoToBeSaved;
 	}
 	
@@ -124,6 +132,7 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 
 	@Override
 	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws DaoException {
+		LOGGER.info("deleteProjectProfile() - START");
 		int rowsUpdated = 0;
 		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(projectProfileToBeDeleted);
 		try {
@@ -132,11 +141,13 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 			throw new DaoException("ProjectProfileDaoImpl => deleteProjectProfile()",
 					e.getCause().getMessage());
 		}
+		LOGGER.info("deleteProjectProfile() - END");
 		return rowsUpdated;
 	}
 
 	@Override
 	public int updateProjectProfile(ProjectProfileDto projectProfileToBeUpdated) throws DaoException {
+		LOGGER.info("updateProjectProfile() - START");
 		int rowsUpdated = 0;
 		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(projectProfileToBeUpdated);
 		try {
@@ -145,6 +156,7 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 			throw new DaoException("ProjectProfileDaoImpl => deleteProjectProfile()",
 					e.getCause().getMessage());
 		}
+		LOGGER.info("updateProjectProfile() - END");
 		return rowsUpdated;
 	}
 }

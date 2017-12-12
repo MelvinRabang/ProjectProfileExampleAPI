@@ -2,6 +2,7 @@ package com.doctorcrushaneapps.service.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,12 @@ public class SearchProjectProfileServiceImpl implements SearchProjectProfileServ
 	@Autowired
 	ProjectProfileDao projectProfileDao;
 
+	Logger LOGGER = Logger.getLogger(SearchProjectProfileServiceImpl.class);
+	
 	@Override
 	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto)
 			throws ServiceException {
+		LOGGER.info("searchProjectProfile() - START");
 		String queryStringForProjectProfileSearch =
 				this.deriveQueryStringForProjectProfileSearch(projectProfileDto);
 		List<ProjectProfileDto> projectProfileList = null;
@@ -29,6 +33,7 @@ public class SearchProjectProfileServiceImpl implements SearchProjectProfileServ
 			throw new ServiceException("Error in SearchProjectProfileService => searchProjectProfile()",
 				e.getErrorCode());
 		}
+		LOGGER.info("searchProjectProfile() - START");
 		return projectProfileList;
 	}
 
