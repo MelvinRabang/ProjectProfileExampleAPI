@@ -34,4 +34,5 @@
 <fullyQualifiedTypeName name="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
 <fullyQualifiedTypeName name="org.springframework.boot.context.properties.ConfigurationProperties"/>
 <fullyQualifiedTypeName name="com.doctorcrushaneapps.app.ProjectProfileSqlConfigureProperties"/>
+<fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
 </qualifiedTypeNameHistroy>
