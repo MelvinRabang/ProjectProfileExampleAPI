@@ -16,17 +16,18 @@ import com.doctorcrushaneapps.service.SearchProjectProfileService;
 import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
 @RestController
+@RequestMapping(value="/api")
 public class ProjectProfileController {
 
 	@Autowired
 	SearchProjectProfileService searchProjectProfileService;
-	
+
 	@Autowired
 	UpdateProjectProfileService updateProjectProfileService;
 
 	Logger LOGGER = Logger.getLogger(ProjectProfileController.class);
-	
-	@RequestMapping(value="/api/searchProjectProfiles", method=RequestMethod.POST)
+
+	@RequestMapping(value="/searchProjectProfiles", method=RequestMethod.POST)
 	public List<ProjectProfileDto> searchProjectProfiles(@RequestBody ProjectProfileDto searchProjectProfile)
 			throws ControllerException{
 		LOGGER.info("searchProjectProfiles() - START");
@@ -39,9 +40,9 @@ public class ProjectProfileController {
 		LOGGER.info("searchProjectProfiles() - END");
 		return projectProfileList;
 	}
-	
-	@RequestMapping(value="/api/saveProjectProfiles", method=RequestMethod.POST)
-	public ProjectProfileDto saveProjectProfiles(@RequestBody ProjectProfileDto projectProfileDtoToBeSaved) 
+
+	@RequestMapping(value="/saveProjectProfiles", method=RequestMethod.POST)
+	public ProjectProfileDto saveProjectProfiles(@RequestBody ProjectProfileDto projectProfileDtoToBeSaved)
 			throws ControllerException {
 		LOGGER.info("saveProjectProfiles() - START");
 		ProjectProfileDto finalProjectProfileDto = null;
@@ -53,9 +54,9 @@ public class ProjectProfileController {
 		LOGGER.info("saveProjectProfiles() - END");
 		return finalProjectProfileDto;
 	}
-	
-	@RequestMapping(value="/api/isProjectProfileExist", method=RequestMethod.POST)
-	public boolean doesProjectProfileExist(@RequestBody ProjectProfileDto projectProfileDto) 
+
+	@RequestMapping(value="/isProjectProfileExist", method=RequestMethod.POST)
+	public boolean doesProjectProfileExist(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
 		LOGGER.info("isProjectProfileExist() - START");
 		boolean isProjectProfileExist = false;
@@ -67,8 +68,8 @@ public class ProjectProfileController {
 		LOGGER.info("isProjectProfileExist() - END");
 		return isProjectProfileExist;
 	}
-	
-	@RequestMapping(value="/api/deleteProjectProfile", method=RequestMethod.POST)
+
+	@RequestMapping(value="/deleteProjectProfile", method=RequestMethod.POST)
 	public int deleteProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
 		LOGGER.info("deleteProjectProfile() - START");
@@ -81,8 +82,8 @@ public class ProjectProfileController {
 		LOGGER.info("deleteProjectProfile() - END");
 		return rowsUpdated;
 	}
-	
-	@RequestMapping(value="/api/updateProjectProfile", method=RequestMethod.PUT)
+
+	@RequestMapping(value="/updateProjectProfile", method=RequestMethod.PUT)
 	public int updateProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
 		LOGGER.info("updateProjectProfile() - START");
