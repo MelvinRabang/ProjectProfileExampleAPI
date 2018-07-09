@@ -1,7 +1,13 @@
 package com.doctorcrushaneapps.dto;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "ProjectProfiles")
 public class ProjectProfileDto {
 
+	@Id
+	private String id;
 	private String projectProfileName;
 	private String projectProfileSubTeamName;
 	private String projectProfileDeliveryLead;
@@ -10,6 +16,14 @@ public class ProjectProfileDto {
 	private String projectProfileSeniorExec;
 	private String projectProfileFirstPointContact;
 	private String projectProfileSecondPointContact;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getProjectProfileName() {
 		return projectProfileName;
