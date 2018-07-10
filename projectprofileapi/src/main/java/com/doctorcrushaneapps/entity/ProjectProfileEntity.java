@@ -1,7 +1,12 @@
-package com.doctorcrushaneapps.dto;
+package com.doctorcrushaneapps.entity;
 
-public class ProjectProfileDto {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "ProjectProfiles")
+public class ProjectProfileEntity {
+
+	@Id
 	private String id;
 	private String projectProfileName;
 	private String projectProfileSubTeamName;
