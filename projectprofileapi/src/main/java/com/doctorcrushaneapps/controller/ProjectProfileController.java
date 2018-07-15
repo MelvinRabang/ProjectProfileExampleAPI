@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.doctorcrushaneapps.dao.ProjectProfileDao;
 import com.doctorcrushaneapps.dto.ProjectProfileDto;
 import com.doctorcrushaneapps.exception.ControllerException;
 import com.doctorcrushaneapps.exception.ServiceException;
@@ -16,8 +17,11 @@ import com.doctorcrushaneapps.service.SearchProjectProfileService;
 import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
 @RestController
-@RequestMapping(value="/api")
+@RequestMapping(value="/projectProfiles")
 public class ProjectProfileController {
+
+	@Autowired
+	ProjectProfileDao projectProfileDao;
 
 	@Autowired
 	SearchProjectProfileService searchProjectProfileService;
