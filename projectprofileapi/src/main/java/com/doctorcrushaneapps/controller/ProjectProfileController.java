@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.doctorcrushaneapps.dao.ProjectProfileDao;
@@ -17,7 +19,7 @@ import com.doctorcrushaneapps.service.SearchProjectProfileService;
 import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
 @RestController
-@RequestMapping(value="/projectProfiles")
+@RequestMapping(value="/projectprofile")
 public class ProjectProfileController {
 
 	@Autowired
@@ -31,13 +33,13 @@ public class ProjectProfileController {
 
 	Logger LOGGER = Logger.getLogger(ProjectProfileController.class);
 
-	@RequestMapping(value="/searchProjectProfiles", method=RequestMethod.POST)
-	public List<ProjectProfileDto> searchProjectProfiles(@RequestBody ProjectProfileDto searchProjectProfile)
+	@GetMapping
+	public List<ProjectProfileDto> searchProjectProfiles(@RequestParam(name="query") String searchProjectQuery)
 			throws ControllerException{
 		LOGGER.info("searchProjectProfiles() - START");
 		List<ProjectProfileDto> projectProfileList = null;
 		try {
-			projectProfileList = searchProjectProfileService.searchProjectProfile(searchProjectProfile);
+			projectProfileList = searchProjectProfileService.searchProjectProfile(searchProjectQuery);
 		} catch (ServiceException e) {
 			throw new ControllerException("Controller Exception - searchProjectProfiles() => ", e.getErrorCode());
 		}

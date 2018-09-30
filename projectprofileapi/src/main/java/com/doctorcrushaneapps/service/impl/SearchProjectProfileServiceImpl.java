@@ -1,6 +1,8 @@
 package com.doctorcrushaneapps.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,11 @@ public class SearchProjectProfileServiceImpl implements SearchProjectProfileServ
 	Logger LOGGER = Logger.getLogger(SearchProjectProfileServiceImpl.class);
 	
 	@Override
-	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto)
+	public List<ProjectProfileDto> searchProjectProfile(String searchProfileQuery)
 			throws ServiceException {
 		LOGGER.info("searchProjectProfile() - START");
+		ProjectProfileDto projectProfileDto = 
+				this.deriveProjectProfileDtoFromQuery(searchProfileQuery);
 		String queryStringForProjectProfileSearch =
 				this.deriveQueryStringForProjectProfileSearch(projectProfileDto);
 		List<ProjectProfileDto> projectProfileList = null;
@@ -33,8 +37,51 @@ public class SearchProjectProfileServiceImpl implements SearchProjectProfileServ
 			throw new ServiceException("Error in SearchProjectProfileService => searchProjectProfile()",
 				e.getErrorCode());
 		}
-		LOGGER.info("searchProjectProfile() - START");
+		LOGGER.info("searchProjectProfile() - END");
 		return projectProfileList;
+	}
+
+	private ProjectProfileDto deriveProjectProfileDtoFromQuery(String searchProfileQuery) {
+		ProjectProfileDto profileDto = new ProjectProfileDto();
+		Map<String, String> searchQueryMap = createSearchQueryMap(searchProfileQuery);
+		setProfileDtoUsingSearchQueryMap(profileDto, searchQueryMap);
+		return profileDto;
+	}
+
+	private void setProfileDtoUsingSearchQueryMap(ProjectProfileDto profileDto, Map<String, String> searchQueryMap) {
+		if (searchQueryMap.get("deliverylead") != null) {
+			profileDto.setProjectProfileDeliveryLead(searchQueryMap.get("deliveryLead"));
+		}
+		if (searchQueryMap.get("firstpointcontact") != null) {
+			profileDto.setProjectProfileFirstPointContact(searchQueryMap.get("firstpointcontact"));
+		}
+		if (searchQueryMap.get("industrygroup") != null) {
+			profileDto.setProjectProfileIndustryGroup(searchQueryMap.get("industrygroup"));
+		}
+		if (searchQueryMap.get("profilename") != null) {
+			profileDto.setProjectProfileName(searchQueryMap.get("profilename"));
+		}
+		if (searchQueryMap.get("projectlocation") != null) {
+			profileDto.setProjectProfileProjectLocation(searchQueryMap.get("projectlocation"));
+		}
+		if (searchQueryMap.get("secondpointcontact") != null) {
+			profileDto.setProjectProfileSecondPointContact(searchQueryMap.get("secondpointcontact"));
+		}
+		if (searchQueryMap.get("seniorexec") != null) {
+			profileDto.setProjectProfileSeniorExec(searchQueryMap.get("seniorexec"));
+		}
+		if (searchQueryMap.get("subteamname") != null) {
+			profileDto.setProjectProfileSubTeamName(searchQueryMap.get("subteamname"));
+		}
+	}
+
+	private Map<String, String> createSearchQueryMap(String searchProfileQuery) {
+		Map<String, String> searchQueryMap = new HashMap<String, String>();
+		for(String keyValue : searchProfileQuery.split(",")) {
+		   String[] pairs = keyValue.split("=");
+		   searchQueryMap.put(pairs[0], pairs[1]);
+		}
+		return searchQueryMap;
 	}
 
 	private String deriveQueryStringForProjectProfileSearch(ProjectProfileDto projectProfileDto) {

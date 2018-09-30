@@ -7,5 +7,5 @@ import com.doctorcrushaneapps.exception.ServiceException;
 
 public interface SearchProjectProfileService {
 
-	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto) throws ServiceException;
+	public List<ProjectProfileDto> searchProjectProfile(String searchProfileQuery) throws ServiceException;
 }
