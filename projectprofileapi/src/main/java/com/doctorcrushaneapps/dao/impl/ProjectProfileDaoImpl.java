@@ -1,4 +1,4 @@
-package com.doctorcrshaneapps.dao.impl;
+package com.doctorcrushaneapps.dao.impl;
 import java.sql.ResultSet;	
 import java.sql.SQLException;	
 import java.util.HashMap;	
@@ -44,15 +44,15 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 		List<ProjectProfileDto> searchProjectProfileList = null;	
 		try {	
 			searchProjectProfileList = 	
-					jdbcTemplate.query(queryStringForProjectProfileSearch, new ProjectProfileDtoSearchMapper());	
+				jdbcTemplate.query(queryStringForProjectProfileSearch, new ProjectProfileDtoSearchMapper());	
 		} catch (DataAccessException e) {	
 			throw new DaoException("ProjectProfileDaoImpl => searchProjectProfile()",	
-					e.getCause().getMessage());	
+					e.getCause().getMessage());
 		}	
 		LOGGER.info("searchProjectProfile() - END");	
 		return searchProjectProfileList;	
 	}	
-		
+
 	@Override	
 	public boolean doesProjectProfileExist(ProjectProfileDto profileProfileDto) throws DaoException {	
 		LOGGER.info("doesProjectProfileExist() - START");	

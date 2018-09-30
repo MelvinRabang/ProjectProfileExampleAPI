@@ -73,7 +73,7 @@ public class ProjectProfileController {
 		return isProjectProfileExist;
 	}
 
-	@RequestMapping(value="/deleteProjectProfile", method=RequestMethod.POST)
+	@RequestMapping(value="/projectProfile", method=RequestMethod.DELETE)
 	public int deleteProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
 		LOGGER.info("deleteProjectProfile() - START");
