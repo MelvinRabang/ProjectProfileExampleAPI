@@ -47,7 +47,7 @@ public class ProjectProfileController {
 		return projectProfileList;
 	}
 
-	@RequestMapping(value="/saveProjectProfiles", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public ProjectProfileDto saveProjectProfiles(@RequestBody ProjectProfileDto projectProfileDtoToBeSaved)
 			throws ControllerException {
 		LOGGER.info("saveProjectProfiles() - START");
