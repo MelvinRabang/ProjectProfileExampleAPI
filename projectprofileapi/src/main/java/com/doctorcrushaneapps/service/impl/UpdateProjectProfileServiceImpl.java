@@ -45,18 +45,18 @@ public class UpdateProjectProfileServiceImpl implements UpdateProjectProfileServ
 		return savedProjectProfileDto;
 	}
 
-//	@Override
-//	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws ServiceException {
-//		LOGGER.info("deleteProjectProfile() - START");
-//		int rowsUpdated = 0;
-//		try {
-//			rowsUpdated = this.projectProfileDao.deleteProjectProfile(projectProfileToBeDeleted);
-//		} catch (DaoException e) {
-//			throw new ServiceException("Service Exception - deleteProjectProfile() =>", e.getErrorCode());
-//		}
-//		LOGGER.info("deleteProjectProfile() - END");
-//		return rowsUpdated;
-//	}
+	@Override
+	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws ServiceException {
+		LOGGER.info("deleteProjectProfile() - START");
+		int rowsUpdated = 0;
+		try {
+			rowsUpdated = this.projectProfileDao.deleteProjectProfile(projectProfileToBeDeleted);
+		} catch (DaoException e) {
+			throw new ServiceException("Service Exception - deleteProjectProfile() =>", e.getErrorCode());
+		}
+		LOGGER.info("deleteProjectProfile() - END");
+		return rowsUpdated;
+	}
 
 	@Override
 	public int updateProjectProfile(ProjectProfileDto projectProfileToBeUpdated) throws ServiceException {
@@ -70,11 +70,4 @@ public class UpdateProjectProfileServiceImpl implements UpdateProjectProfileServ
 		LOGGER.info("updateProjectProfile() - END");
 		return rowsUpdated;
 	}
-
-	@Override
-	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws ServiceException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

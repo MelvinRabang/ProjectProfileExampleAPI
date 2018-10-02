@@ -75,7 +75,7 @@ public class ProjectProfileController {
 		return isProjectProfileExist;
 	}
 
-	@RequestMapping(value="/projectProfile", method=RequestMethod.DELETE)
+	@RequestMapping(method=RequestMethod.DELETE)
 	public int deleteProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
 		LOGGER.info("deleteProjectProfile() - START");
@@ -89,7 +89,7 @@ public class ProjectProfileController {
 		return rowsUpdated;
 	}
 
-	@RequestMapping(value="/updateProjectProfile", method=RequestMethod.PUT)
+	@RequestMapping(method=RequestMethod.PUT)
 	public int updateProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
 		LOGGER.info("updateProjectProfile() - START");
