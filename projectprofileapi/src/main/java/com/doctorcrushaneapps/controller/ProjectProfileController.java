@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import com.doctorcrushaneapps.service.SearchProjectProfileService;
 import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
 @RestController
-@RequestMapping(value="/projectprofile")
+@RequestMapping(value="/api/projectprofile")
 public class ProjectProfileController {
 
 	@Autowired
@@ -33,6 +34,7 @@ public class ProjectProfileController {
 
 	Logger LOGGER = Logger.getLogger(ProjectProfileController.class);
 
+	@CrossOrigin
 	@GetMapping
 	public List<ProjectProfileDto> searchProjectProfiles(@RequestParam(name="query") String searchProjectQuery)
 			throws ControllerException{
