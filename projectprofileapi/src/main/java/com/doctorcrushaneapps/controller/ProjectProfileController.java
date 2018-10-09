@@ -19,6 +19,7 @@ import com.doctorcrushaneapps.exception.ServiceException;
 import com.doctorcrushaneapps.service.SearchProjectProfileService;
 import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/api/projectprofile")
 public class ProjectProfileController {
@@ -34,7 +35,6 @@ public class ProjectProfileController {
 
 	Logger LOGGER = Logger.getLogger(ProjectProfileController.class);
 
-	@CrossOrigin
 	@GetMapping
 	public List<ProjectProfileDto> searchProjectProfiles(@RequestParam(name="query") String searchProjectQuery)
 			throws ControllerException{
@@ -77,6 +77,7 @@ public class ProjectProfileController {
 		return isProjectProfileExist;
 	}
 
+	@CrossOrigin
 	@RequestMapping(method=RequestMethod.DELETE)
 	public int deleteProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
@@ -90,7 +91,7 @@ public class ProjectProfileController {
 		LOGGER.info("deleteProjectProfile() - END");
 		return rowsUpdated;
 	}
-
+	
 	@RequestMapping(method=RequestMethod.PUT)
 	public int updateProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
