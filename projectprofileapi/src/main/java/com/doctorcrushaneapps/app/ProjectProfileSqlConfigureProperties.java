@@ -9,18 +9,9 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "sql")
 public class ProjectProfileSqlConfigureProperties {
 
-	private String doesProjectProfileExistQuery;
 	private String saveProjectProfileQuery;
 	private String deleteProjectProfileQuery;
 	private String updateProjectProfileQuery;
-	
-	public String getDoesProjectProfileExistQuery() {
-		return doesProjectProfileExistQuery;
-	}
-	
-	public void setDoesProjectProfileExistQuery(String doesProjectProfileExistQuery) {
-		this.doesProjectProfileExistQuery = doesProjectProfileExistQuery;
-	}
 	
 	public String getSaveProjectProfileQuery() {
 		return saveProjectProfileQuery;

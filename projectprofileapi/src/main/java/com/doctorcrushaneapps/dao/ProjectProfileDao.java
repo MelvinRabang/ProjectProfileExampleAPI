@@ -10,8 +10,6 @@ public interface ProjectProfileDao {
 	public List<ProjectProfileDto> searchProjectProfile(ProjectProfileDto projectProfileDto,
 			String queryStringForProjectProfileSearch) throws DaoException;
 	
-	public boolean doesProjectProfileExist(ProjectProfileDto profileProfileDto) throws DaoException;
-
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto profileProfileDtoToBeSaved) throws DaoException;
 	
 	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws DaoException;

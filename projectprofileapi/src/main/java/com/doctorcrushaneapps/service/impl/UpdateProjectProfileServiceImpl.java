@@ -20,19 +20,6 @@ public class UpdateProjectProfileServiceImpl implements UpdateProjectProfileServ
 	Logger LOGGER = Logger.getLogger(UpdateProjectProfileServiceImpl.class);
 	
 	@Override
-	public boolean doesProjectProfileExist(ProjectProfileDto profileProfileDto) throws ServiceException {
-		LOGGER.info("doesProjectProfileExist() - START");
-		boolean doesProjectProfileExist = false;
-		try {
-			doesProjectProfileExist = this.projectProfileDao.doesProjectProfileExist(profileProfileDto);
-		} catch (DaoException e) {
-			throw new ServiceException("Service Exception - doesProjectProfileExist() =>", e.getErrorCode());
-		}
-		LOGGER.info("doesProjectProfileExist() - END");
-		return doesProjectProfileExist;
-	}
-
-	@Override
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto profileProfileDtoToBeSaved) throws ServiceException {
 		LOGGER.info("saveProjectProfile() - START");
 		ProjectProfileDto savedProjectProfileDto = null;

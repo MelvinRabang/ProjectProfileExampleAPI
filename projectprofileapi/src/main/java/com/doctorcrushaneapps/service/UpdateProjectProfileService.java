@@ -5,8 +5,6 @@ import com.doctorcrushaneapps.exception.ServiceException;
 
 public interface UpdateProjectProfileService {
 
-	public boolean doesProjectProfileExist(ProjectProfileDto profileProfileDto) throws ServiceException;
-	
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto projectProfileDtoToBeSaved) throws ServiceException;
 	
 	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws ServiceException;

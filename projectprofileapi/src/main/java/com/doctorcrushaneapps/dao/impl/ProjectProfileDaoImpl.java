@@ -54,24 +54,6 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 	}	
 
 	@Override	
-	public boolean doesProjectProfileExist(ProjectProfileDto profileProfileDto) throws DaoException {	
-		LOGGER.info("doesProjectProfileExist() - START");	
-		boolean doesProjectProfileExist = false;	
-		ProjectProfileDto projectProfileRetrievedFromDB = null;	
-		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(profileProfileDto);	
-		try {	
-			projectProfileRetrievedFromDB =	
-					(ProjectProfileDto) namedParameterJdbcTemplate.queryForObject(sqlProperties.getDoesProjectProfileExistQuery(),	
-							projectProfileNamedParameters, new ProjectProfileDtoSearchMapper());	
-		} catch (DataAccessException e) {	
-			return doesProjectProfileExist;	
-		}	
-		doesProjectProfileExist = isProjectProfileExistInDB(projectProfileRetrievedFromDB);	
-		LOGGER.info("doesProjectProfileExist() - END");	
-		return doesProjectProfileExist;	
-	}	
-	
-	@Override	
 	public ProjectProfileDto saveProjectProfile(ProjectProfileDto profileProfileDtoToBeSaved) throws DaoException {	
 		LOGGER.info("saveProjectProfile() - START");	
 		Map<String, String> projectProfileNamedParameters = putProjectProfileQueryParameters(profileProfileDtoToBeSaved);	

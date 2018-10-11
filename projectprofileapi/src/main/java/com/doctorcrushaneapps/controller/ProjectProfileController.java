@@ -63,21 +63,6 @@ public class ProjectProfileController {
 		return finalProjectProfileDto;
 	}
 
-	@RequestMapping(value="/isProjectProfileExist", method=RequestMethod.POST)
-	public boolean doesProjectProfileExist(@RequestBody ProjectProfileDto projectProfileDto)
-			throws ControllerException {
-		LOGGER.info("isProjectProfileExist() - START");
-		boolean isProjectProfileExist = false;
-		try {
-			isProjectProfileExist = updateProjectProfileService.doesProjectProfileExist(projectProfileDto);
-		} catch (ServiceException e) {
-			throw new ControllerException("Controller Exception - doesProjectProfileExist() => ", e.getErrorCode());
-		}
-		LOGGER.info("isProjectProfileExist() - END");
-		return isProjectProfileExist;
-	}
-
-	@CrossOrigin
 	@RequestMapping(method=RequestMethod.DELETE)
 	public int deleteProjectProfile(@RequestBody ProjectProfileDto projectProfileDto)
 			throws ControllerException {
