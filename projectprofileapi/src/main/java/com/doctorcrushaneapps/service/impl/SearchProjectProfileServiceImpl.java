@@ -87,38 +87,57 @@ public class SearchProjectProfileServiceImpl implements SearchProjectProfileServ
 	private String deriveQueryStringForProjectProfileSearch(ProjectProfileDto projectProfileDto) {
 		StringBuilder queryStringForProjProfSearch = new StringBuilder();
 		queryStringForProjProfSearch.append("SELECT * FROM PRJCT_PROFL WHERE");
+		int queryCount = 0;
 		
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileDeliveryLead())) {
 			queryStringForProjProfSearch.append(" DLVRY_LD_EID LIKE '%" +
 				projectProfileDto.getProjectProfileDeliveryLead() + "%' ");
+			queryCount++;
+			
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileIndustryGroup())) {
+			checkQueryCount(queryStringForProjProfSearch, queryCount);
 			queryStringForProjProfSearch.append(" IND_GRP LIKE '%" +
 					projectProfileDto.getProjectProfileIndustryGroup() + "%' ");
+			queryCount++;
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileName())) {
+			checkQueryCount(queryStringForProjProfSearch, queryCount);
 			queryStringForProjProfSearch.append(" PRJ_NM LIKE '%" +
 					projectProfileDto.getProjectProfileName() + "%' ");
+			queryCount++;
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileProjectLocation())) {
+			checkQueryCount(queryStringForProjProfSearch, queryCount);
 			queryStringForProjProfSearch.append(" PRJCT_LOC LIKE '%" +
 					projectProfileDto.getProjectProfileProjectLocation() + "%' ");
+			queryCount++;
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileSeniorExec())) {
+			checkQueryCount(queryStringForProjProfSearch, queryCount);
 			queryStringForProjProfSearch.append(" SNR_EXC_EID LIKE '%" +
 					projectProfileDto.getProjectProfileSeniorExec() + "%' ");
+			queryCount++;
 		}
 		if (projProfileVariableNotNullAndNotEmpty(
 				projectProfileDto.getProjectProfileSubTeamName())) {
+			checkQueryCount(queryStringForProjProfSearch, queryCount);
 			queryStringForProjProfSearch.append(" SB_TM_NM LIKE '%" +
-					projectProfileDto.getProjectProfileSeniorExec() + "%' ");
+					projectProfileDto.getProjectProfileSubTeamName() + "%' ");
+			queryCount++;
 		}
 		return queryStringForProjProfSearch.toString();
+	}
+
+	private void checkQueryCount(StringBuilder queryStringForProjProfSearch, int queryCount) {
+		if (queryCount > 0) {
+			queryStringForProjProfSearch.append(" AND");
+		}
 	}
 	
 	private boolean projProfileVariableNotNullAndNotEmpty(String projProfileVariable) {

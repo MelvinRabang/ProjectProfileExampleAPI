@@ -107,10 +107,6 @@ public class ProjectProfileDaoImpl implements ProjectProfileDao {
 		return projectProfileNamedParameters;	
 	}	
 	
-	private static boolean isProjectProfileExistInDB(ProjectProfileDto projectProfileRetrievedFromDB) {	
-		return projectProfileRetrievedFromDB != null;	
-	}	
-	
 	@Override	
 	public int deleteProjectProfile(ProjectProfileDto projectProfileToBeDeleted) throws DaoException {	
 		LOGGER.info("deleteProjectProfile() - START");	

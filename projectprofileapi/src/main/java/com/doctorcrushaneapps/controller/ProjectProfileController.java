@@ -21,7 +21,7 @@ import com.doctorcrushaneapps.service.UpdateProjectProfileService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/api/projectprofile")
+@RequestMapping(value="/api/projectprofiles")
 public class ProjectProfileController {
 
 	@Autowired
